@@ -31,7 +31,6 @@ const props = defineProps({
  */
 
 const isExternal = computed(() => {
-  console.log(external(props.icon))
   return external(props.icon)
 })
 /*
