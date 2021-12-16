@@ -7,6 +7,9 @@ import installIcons from '@/icons'
 // 初始化样式表
 import '@/styles/index.scss'
 
+// 导入路由鉴权
+import './permission'
+
 const app = createApp(App)
 installElementPlus(app)
 installIcons(app)

@@ -103,7 +103,7 @@ const handleLogin = () => {
     if (!valid) return
     loading.value = true
     store
-      .dispatch('login', loginForm.value)
+      .dispatch('user/login', loginForm.value)
       .then(() => {
         loading.value = false
       })

@@ -1,9 +1,20 @@
 import { login } from '@/api/sys'
 import md5 from 'md5'
+import { setItem, getItem } from '@/utils/storage'
+import { TOKEN } from '@/constant'
+import router from '@/router'
+
 export default {
-  nmespaced: true, // 单独模块
-  state: () => ({}),
-  mutations: {},
+  namespaced: true, // 单独模块
+  state: () => ({
+    token: getItem(TOKEN) || ''
+  }),
+  mutations: {
+    setToken(state, token) {
+      state.token = token
+      setItem(TOKEN, token)
+    }
+  },
   actions: {
     login(context, userInfo) {
       const { username, password } = userInfo
@@ -13,6 +24,9 @@ export default {
           password: md5(password)
         })
           .then((data) => {
+            this.commit('user/setToken', data.token)
+            // 跳转
+            router.push('/')
             resolve()
           })
           .catch((err) => {
