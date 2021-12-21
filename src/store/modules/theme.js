@@ -2,7 +2,6 @@ import { getItem, setItem } from '@/utils/storage'
 import { MAIN_COLOR, DEFAULT_COLOR } from '@/constant'
 import variables from '@/styles/variables.scss'
 
-console.log(variables)
 export default {
   namespaced: true,
   state: () => ({
