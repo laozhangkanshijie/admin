@@ -1,12 +1,9 @@
 <template>
-  <div>
-    aa
-    <ul class="context-menu-container">
-      <li @click="onRefreshClick">{{ $t('msg.tagsView.refresh') }}</li>
-      <li @click="onCloseRightClick">{{ $t('msg.tagsView.closeRight') }}</li>
-      <li @click="onCloseOtherClick">{{ $t('msg.tagsView.closeOther') }}</li>
-    </ul>
-  </div>
+  <ul class="context-menu-container">
+    <li @click="onRefreshClick">{{ $t('msg.tagsView.refresh') }}</li>
+    <li @click="onCloseRightClick">{{ $t('msg.tagsView.closeRight') }}</li>
+    <li @click="onCloseOtherClick">{{ $t('msg.tagsView.closeOther') }}</li>
+  </ul>
 </template>
 
 <script setup>

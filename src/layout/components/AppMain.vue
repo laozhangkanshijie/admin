@@ -32,7 +32,6 @@ const getTitle = (route) => {
 }
 
 watch(route, (to, from) => {
-  console.log(to, from)
   if (!isTags(to.path)) return
   const { fullPath, meta, path, params, query } = to
   store.commit(

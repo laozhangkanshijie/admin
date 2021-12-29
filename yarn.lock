@@ -1080,6 +1080,11 @@
   "resolved" "https://registry.npmjs.org/@element-plus/icons-vue/-/icons-vue-0.2.4.tgz"
   "version" "0.2.4"
 
+"@element-plus/icons@^0.0.11":
+  "integrity" "sha512-iKQXSxXu131Ai+I9Ymtcof9WId7kaXvB1+WRfAfpQCW7UiAMYgdNDqb/u0hgTo2Yq3MwC4MWJnNuTBEpG8r7+A=="
+  "resolved" "https://registry.npmjs.org/@element-plus/icons/-/icons-0.0.11.tgz"
+  "version" "0.0.11"
+
 "@eslint/eslintrc@^0.4.3":
   "integrity" "sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw=="
   "resolved" "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-0.4.3.tgz"

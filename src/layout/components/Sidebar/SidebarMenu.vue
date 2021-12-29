@@ -1,13 +1,10 @@
 <template>
-  <!-- 一级 menu 菜单 -->
+  <!--   一级 menu 菜单 -->
   <el-menu
     :unique-opened="true"
     :collapse="!$store.getters.sidebarOpened"
     :default-active="activeMenu"
     router
-    :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText"
-    :active-text-color="$store.getters.cssVar.menuActiveText"
   >
     <SidebarItem
       v-for="item in routes"

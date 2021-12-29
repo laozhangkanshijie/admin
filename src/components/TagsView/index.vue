@@ -13,12 +13,14 @@
       @contextmenu.prevent="openMenu($event, index)"
     >
       {{ tag.title }}
-      <i
-        v-show="!isActive(tag)"
-        class="el-icon-close"
-        @click.prevent.stop="onCloseClick"
-        >*</i
-      >
+      <el-icon v-show="!isActive(tag)" @click.prevent.stop="onCloseClick"
+        ><close
+      /></el-icon>
+      <!--      <i-->
+      <!--        v-show="!isActive(tag)"-->
+      <!--        class="el-icon-close"-->
+      <!--        @click.prevent.stop="onCloseClick"-->
+      <!--      ></i>-->
     </router-link>
     <context-menu
       v-show="visible"
@@ -32,7 +34,7 @@
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { ContextMenu } from './ContextMenu.vue'
+import ContextMenu from './ContextMenu'
 
 const router = useRouter()
 const isActive = (tag) => {

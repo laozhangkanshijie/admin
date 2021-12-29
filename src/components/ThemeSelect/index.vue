@@ -8,14 +8,14 @@
     @command="handleSetTheme"
   >
     <div>
-      <el-tooltip :content="$t('navBar.themeChange')">
+      <el-tooltip :content="$t('msg.navBar.themeChange')">
         <svg-icon icon="change-theme" />
       </el-tooltip>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item command="color">
-          {{ $t('theme.themeColorChange') }}
+          {{ $t('msg.theme.themeColorChange') }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

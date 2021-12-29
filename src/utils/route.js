@@ -1,6 +1,5 @@
 import { resolve } from './path'
 
-console.log(resolve())
 /**
  * 返回所有子路由
  */

@@ -1,12 +1,12 @@
 <template>
   <el-dialog
-    :title="$t('theme.universal.title')"
+    :title="$t('msg.universal.title')"
     :model-value="modelValue"
     @close="closed"
     width="22%"
   >
     <div class="center">
-      <p class="title">{{ $t('theme.themeColorChange') }}</p>
+      <p class="title">{{ $t('msg.theme.themeColorChange') }}</p>
       <el-color-picker
         v-model="mColor"
         :predefine="predefineColors"
@@ -14,9 +14,9 @@
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="closed">{{ $t('universal.cancel') }}</el-button>
+        <el-button @click="closed">{{ $t('msg.universal.cancel') }}</el-button>
         <el-button type="primary" @click="comfirm">{{
-          $t('universal.confirm')
+          $t('msg.universal.confirm')
         }}</el-button>
       </span>
     </template>
