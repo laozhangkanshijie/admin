@@ -6,11 +6,15 @@ function resolve(dir) {
 
 module.exports = {
   devServer: {
+    open: true, // 打开浏览器
+    onBeforeSetupMiddleware: require('./mock/mock-server.js'),
     proxy: {
-      // 当地址中包含/api 的时候， 触发此代理
-      '/api': {
-        target: 'https://api.imooc-admin.lgdsunday.club',
-        changeOrigin: true
+      // 当地址中包含 process.env.VUE_APP_BASE_API 的时候， 触发此代理
+      [process.env.VUE_APP_BASE_API]: {
+        // target: 'https://api.imooc-admin.lgdsunday.club',
+        target: 'https://book.youbaobao.xyz:18082',
+        changeOrigin: true,
+        pathRewrite: { ['^' + process.env.VUE_APP_BASE_API]: '' }
       }
     }
   },
