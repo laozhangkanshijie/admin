@@ -15,21 +15,10 @@ import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { isTags } from '@/utils/tags'
 import { useStore } from 'vuex'
-import { generateTitle, watchSwitchLang } from '@/utils/i18n'
+import { getTitle } from '@/utils/i18n'
 
 const route = useRoute()
 const store = useStore()
-
-const getTitle = (route) => {
-  let title = ''
-  if (!route.meta) {
-    const pathArr = route.path.split('/')
-    title = pathArr[pathArr.length - 1]
-  } else {
-    title = generateTitle(route.meta.title)
-  }
-  return title
-}
 
 const addTags = (to, from) => {
   if (!isTags(to.path)) return
@@ -55,17 +44,6 @@ addTags(route)
 
 watch(route, (to, from) => {
   addTags(to, from)
-})
-watchSwitchLang(() => {
-  store.getters.tagsViewList.forEach((route, index) => {
-    store.commit('app/changeTagsView', {
-      index,
-      tag: {
-        ...route,
-        title: getTitle(route)
-      }
-    })
-  })
 })
 </script>
 

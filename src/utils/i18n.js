@@ -14,3 +14,15 @@ export function watchSwitchLang(...cbs) {
     }
   )
 }
+
+// 通过路由获取title
+export function getTitle(route) {
+  let title = ''
+  if (!route.meta) {
+    const pathArr = route.path.split('/')
+    title = pathArr[pathArr.length - 1]
+  } else {
+    title = generateTitle(route.meta.title)
+  }
+  return title
+}

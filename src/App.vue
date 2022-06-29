@@ -5,9 +5,23 @@
 import { useStore } from 'vuex'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 
+import { getTitle, watchSwitchLang } from '@/utils/i18n'
+
 const store = useStore()
 generateNewStyle(store.getters.mainColor).then((newStyleText) => {
   writeNewStyle(newStyleText)
+})
+
+watchSwitchLang(() => {
+  store.getters.tagsViewList.forEach((route, index) => {
+    store.commit('app/changeTagsView', {
+      index,
+      tag: {
+        ...route,
+        title: getTitle(route)
+      }
+    })
+  })
 })
 </script>
 <style></style>
