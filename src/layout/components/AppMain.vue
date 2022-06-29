@@ -31,7 +31,7 @@ const getTitle = (route) => {
   return title
 }
 
-watch(route, (to, from) => {
+const addTags = (to, from) => {
   if (!isTags(to.path)) return
   const { fullPath, meta, path, params, query } = to
   store.commit(
@@ -48,6 +48,13 @@ watch(route, (to, from) => {
       immediate: true
     }
   )
+}
+
+// 登录后第一次进入添加标签
+addTags(route)
+
+watch(route, (to, from) => {
+  addTags(to, from)
 })
 watchSwitchLang(() => {
   store.getters.tagsViewList.forEach((route, index) => {

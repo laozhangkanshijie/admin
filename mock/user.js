@@ -9,11 +9,33 @@ const tokens = {
 
 const users = {
   'admin-token': {
-    roles: ['admin'],
-    introduction: 'I am a super administrator',
+    role: [
+      {
+        id: '1',
+        title: '超级管理员'
+      }
+    ],
+    _id: '612710a0ec87aa543c9c341d',
+    id: '0',
+    username: 'super-admin',
+    title: '超级管理员',
     avatar:
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin'
+      'https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png',
+    permission: {
+      menus: [
+        'userManage',
+        'roleList',
+        'permissionList',
+        'articleRanking',
+        'articleCreate'
+      ],
+      points: [
+        'distributeRole',
+        'importUser',
+        'removeUser',
+        'distributePermission'
+      ]
+    }
   },
   'editor-token': {
     roles: ['editor'],

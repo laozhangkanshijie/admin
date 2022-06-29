@@ -5,7 +5,7 @@ import { generateColors } from '@/utils/theme'
 const getters = {
   token: (state) => state.user.token,
   /*
-   * @retturn true表示mei有用户形象
+   * @return true表示有用户信息
    * */
   hasUserInfo: (state) => {
     return JSON.stringify(state.user.userInfo) !== '{}'

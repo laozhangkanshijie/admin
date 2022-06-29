@@ -1,27 +1,29 @@
 <template>
   <div class="tags-view-container">
-    <router-link
-      v-for="(tag, index) in $store.getters.tagsViewList"
-      class="tags-view-item"
-      :key="tag.fullPath"
-      :class="isActive(tag) ? 'active' : ''"
-      :to="{ path: tag.fullPath }"
-      :style="{
-        backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-        borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
-      }"
-      @contextmenu.prevent="openMenu($event, index)"
-    >
-      {{ tag.title }}
-      <el-icon v-show="!isActive(tag)" @click.prevent.stop="onCloseClick"
-        ><close
-      /></el-icon>
-      <!--      <i-->
-      <!--        v-show="!isActive(tag)"-->
-      <!--        class="el-icon-close"-->
-      <!--        @click.prevent.stop="onCloseClick"-->
-      <!--      ></i>-->
-    </router-link>
+    <el-scrollbar class="tags-view-wrapper">
+      <router-link
+        v-for="(tag, index) in $store.getters.tagsViewList"
+        class="tags-view-item"
+        :key="tag.fullPath"
+        :class="isActive(tag) ? 'active' : ''"
+        :to="{ path: tag.fullPath }"
+        :style="{
+          backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
+          borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
+        }"
+        @contextmenu.prevent="openMenu($event, index)"
+      >
+        {{ tag.title }}
+        <el-icon v-show="!isActive(tag)" @click.prevent.stop="onCloseClick"
+          ><close
+        /></el-icon>
+        <!--      <i-->
+        <!--        v-show="!isActive(tag)"-->
+        <!--        class="el-icon-close"-->
+        <!--        @click.prevent.stop="onCloseClick"-->
+        <!--      ></i>-->
+      </router-link>
+    </el-scrollbar>
     <context-menu
       v-show="visible"
       :style="menuStyle"
@@ -32,11 +34,11 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import ContextMenu from './ContextMenu'
 
-const router = useRouter()
+const router = useRoute()
 const isActive = (tag) => {
   return tag.path === router.path
 }

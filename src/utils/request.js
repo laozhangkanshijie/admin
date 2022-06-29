@@ -15,7 +15,7 @@ service.interceptors.request.use(
   (config) => {
     if (store.getters.token) {
       if (isCheckTimeout()) {
-        store.dispatch('user/logout')
+        store.dispatch('user/logout') // 登录超时失效 用户被动退出的主动处理
         return Promise.reject(new Error('token 失效'))
       }
       config.headers.Authorization = `Bearer ${store.getters.token}`

@@ -180,20 +180,24 @@ const publicRoutes = [
           title: 'profile',
           icon: 'el-icon-user'
         }
-      },
-      // 404
-      {
-        path: '/404',
-        name: '404',
-        component: () => import('@/views/error-page/404')
-      },
-      // 401
-      {
-        path: '/401',
-        name: '401',
-        component: () => import('@/views/error-page/401')
       }
     ]
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  // 401
+  {
+    path: '/401',
+    name: '401',
+    component: () => import('@/views/error-page/401')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    redirect: '/404'
   }
 ]
 
