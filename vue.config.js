@@ -12,9 +12,10 @@ module.exports = {
       // 当地址中包含 process.env.VUE_APP_BASE_API 的时候， 触发此代理
       [process.env.VUE_APP_BASE_API]: {
         // target: 'https://api.imooc-admin.lgdsunday.club',
-        target: 'https://book.youbaobao.xyz:18082',
-        changeOrigin: true,
-        pathRewrite: { ['^' + process.env.VUE_APP_BASE_API]: '' }
+        // target: 'https://book.youbaobao.xyz:18082',
+        target: 'http://localhost:4000',
+        changeOrigin: true
+        // pathRewrite: { ['^' + process.env.VUE_APP_BASE_API]: '' }
       }
     }
   },

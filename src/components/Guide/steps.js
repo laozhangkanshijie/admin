@@ -3,8 +3,8 @@ const steps = (i18n) => {
     {
       element: '#guide-start',
       popover: {
-        title: i18n.t('msg.guide.GuideTitle'),
-        description: i18n.t('msg.guide.GuideDesc'),
+        title: i18n.t('msg.guide.guideTitle'),
+        description: i18n.t('msg.guide.guideDesc'),
         position: 'bottom-right'
       }
     }

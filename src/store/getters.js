@@ -12,8 +12,8 @@ const getters = {
   },
   cssVar: (state) => {
     return {
-      ...generateColors(getItem(MAIN_COLOR)),
-      ...state.theme.variables
+      ...state.theme.variables,
+      ...generateColors(getItem(MAIN_COLOR))
     }
   },
   userInfo: (state) => {

@@ -1,4 +1,4 @@
-import { login, getUserInfo } from '@/api/sys'
+import { login, register, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem, removeAlllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -33,6 +33,21 @@ export default {
             // 跳转
             router.push('/')
             setTimeStamp()
+            resolve()
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    register(context, userInfo) {
+      const { username, password } = userInfo
+      return new Promise((resolve, reject) => {
+        register({
+          username,
+          password: md5(password)
+        })
+          .then((data) => {
             resolve()
           })
           .catch((err) => {

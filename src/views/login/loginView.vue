@@ -39,13 +39,25 @@
           </span>
         </span>
       </el-form-item>
-      <el-button
-        type="primary"
-        style="width: 100%; margin-bottom: 30px"
-        :loading="loading"
-        @click="handleLogin"
-        >{{ $t('msg.login.loginBtn') }}</el-button
-      >
+      <div>
+        <el-button
+          type="primary"
+          style="width: 100%; margin-bottom: 30px"
+          :loading="loading"
+          @click="handleLogin"
+          >{{ $t('msg.login.loginBtn') }}</el-button
+        >
+      </div>
+      <div>
+        <el-button
+          type="primary"
+          style="width: 100%; margin-bottom: 30px"
+          :loading="loading"
+          @click="handleRegister"
+          >{{ '注册' }}</el-button
+        >
+      </div>
+
       <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
@@ -120,6 +132,22 @@ const handleLogin = () => {
   })
   // 2.促发登录动作
   // 3.进行登录后处理
+}
+
+const handleRegister = () => {
+  // 1.进行表单校验
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return
+    loading.value = true
+    store
+      .dispatch('user/register', loginForm.value)
+      .then(() => {
+        loading.value = false
+      })
+      .catch(() => {
+        loading.value = false
+      })
+  })
 }
 </script>
 

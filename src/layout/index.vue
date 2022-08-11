@@ -3,7 +3,12 @@
     class="app-wrapper"
     :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
   >
-    <sidebar id="guide-sidebar" class="sidebar-container"> </sidebar>
+    <sidebar
+      id="guide-sidebar"
+      class="sidebar-container"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+    >
+    </sidebar>
     <div class="main-container">
       <div class="fixed-header">
         <navbar></navbar>

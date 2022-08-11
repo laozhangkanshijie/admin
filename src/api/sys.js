@@ -9,6 +9,15 @@ export const login = (data) => {
   })
 }
 
+// 组册接口
+export const register = (data) => {
+  return request({
+    url: '/sys/register',
+    method: 'POST',
+    data
+  })
+}
+
 // 获取用户信息
 export const getUserInfo = () => {
   return request({
