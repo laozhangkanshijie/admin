@@ -7,7 +7,7 @@ function resolve(dir) {
 module.exports = {
   devServer: {
     open: true, // 打开浏览器
-    onBeforeSetupMiddleware: require('./mock/mock-server.js'),
+    // onBeforeSetupMiddleware: require('./mock/mock-server.js'),
     proxy: {
       // 当地址中包含 process.env.VUE_APP_BASE_API 的时候， 触发此代理
       [process.env.VUE_APP_BASE_API]: {
