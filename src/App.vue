@@ -22,6 +22,9 @@ watchSwitchLang(() => {
       }
     })
   })
+  if (store.getters.token) {
+    store.dispatch('user/getUserInfo')
+  }
 })
 </script>
 <style></style>

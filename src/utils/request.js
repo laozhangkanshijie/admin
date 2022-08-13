@@ -10,7 +10,6 @@ const service = axios.create({
   timeout: 5000 // request timeout
 })
 
-// request interceptor
 service.interceptors.request.use(
   (config) => {
     if (store.getters.token) {
@@ -20,6 +19,7 @@ service.interceptors.request.use(
       }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
+    config.headers['Accept-Language'] = store.getters.language
     return config
   },
   (error) => {

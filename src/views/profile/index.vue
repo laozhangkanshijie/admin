@@ -31,6 +31,7 @@ import proFeatrue from './components/ProFeatrue.vue'
 import proChapter from './components/ProChapter.vue'
 import ProAuthor from './components/ProAuthor.vue'
 import { feature } from '@/api/user'
+import { watchSwitchLang } from '@/utils/i18n'
 
 const activeName = ref('')
 
@@ -41,6 +42,8 @@ const getFeatureData = async () => {
 }
 
 getFeatureData()
+
+watchSwitchLang(getFeatureData)
 </script>
 
 <style lang="scss" scoped>
