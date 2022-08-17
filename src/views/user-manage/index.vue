@@ -2,8 +2,12 @@
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary">{{ $t('msg.excel.importExcel') }}</el-button>
-        <el-button type="success">{{ $t('msg.excel.exportExcel') }}</el-button>
+        <el-button type="primary" @click="onImportExcelClick">{{
+          $t('msg.excel.importExcel')
+        }}</el-button>
+        <el-button type="success" @click="onToExcelClick">{{
+          $t('msg.excel.exportExcel')
+        }}</el-button>
       </div>
     </el-card>
     <el-card>
@@ -48,29 +52,44 @@
           fixed="right"
           width="260"
         >
-          <template #default>
+          <template #default="{ row }">
             <el-button type="primary" size="mini">
               {{ $t('msg.excel.show') }}
             </el-button>
             <el-button type="info" size="mini">
               {{ $t('msg.excel.showRole') }}
             </el-button>
-            <el-button type="error" size="mini">
+            <el-button type="error" size="mini" @click="onRemoveClick(row)">
               {{ $t('msg.excel.remove') }}
             </el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagenation></el-pagenation>
+      <el-pagination
+        class="pagination"
+        :current-size="page"
+        :page-size="size"
+        :page-sizes="[2, 5, 10, 20]"
+        :total="total"
+        layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      ></el-pagination>
     </el-card>
+    <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { getUserManageList } from '@/api/user-manage'
+import { ref, onActivated } from 'vue'
+import { useRouter } from 'vue-router'
+import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
+import ExportToExcel from './components/Exprt2Excel.vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
+const i18n = useI18n()
 const tableData = ref([])
 const total = ref(0)
 const page = ref(1)
@@ -87,6 +106,43 @@ const getListData = async () => {
 
 getListData()
 watchSwitchLang(getListData)
+
+const router = useRouter()
+const onImportExcelClick = () => {
+  router.push('/user/import')
+}
+
+const handleSizeChange = (currentSize) => {
+  size.value = currentSize
+  getListData()
+}
+
+const handleCurrentChange = (currentPage) => {
+  page.value = currentPage
+  getListData()
+}
+
+onActivated(getListData)
+
+// 导出
+const exportToExcelVisible = ref(false)
+
+const onToExcelClick = () => {
+  exportToExcelVisible.value = true
+}
+
+const onRemoveClick = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.excel.dialogTitle1') +
+      row.username +
+      i18n.t('msg.excel.dialogTitle2'),
+    { type: 'warning' }
+  ).then(async () => {
+    await deleteUser(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    getListData()
+  })
+}
 </script>
 
 <style lang="scss" scoped>
