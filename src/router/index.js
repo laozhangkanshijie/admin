@@ -98,7 +98,8 @@ const privateRoutes = [
         component: () => import('@/views/user-info/index'),
         meta: {
           title: 'userInfo'
-        }
+        },
+        props: true
       },
       {
         path: '/user/import',

@@ -53,7 +53,7 @@
           width="260"
         >
           <template #default="{ row }">
-            <el-button type="primary" size="mini">
+            <el-button type="primary" size="mini" @click="onShowClick(row._id)">
               {{ $t('msg.excel.show') }}
             </el-button>
             <el-button type="info" size="mini">
@@ -129,6 +129,12 @@ const exportToExcelVisible = ref(false)
 
 const onToExcelClick = () => {
   exportToExcelVisible.value = true
+}
+
+// 查看用户详情
+
+const onShowClick = (id) => {
+  router.push(`/user/info/${id}`)
 }
 
 const onRemoveClick = (row) => {
