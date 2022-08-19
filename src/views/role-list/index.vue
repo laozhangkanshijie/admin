@@ -15,14 +15,23 @@
           :label="$t('msg.role.name')"
           prop="title"
         ></el-table-column>
-        <el-table-column :label="$t('msg.role.action')" width="200" #default="{ row } ">
-          <el-button type="primary" size="mini" @click="onDistributePermission(row)">
+        <el-table-column
+          :label="$t('msg.role.action')"
+          width="200"
+          #default="{ row }"
+        >
+          <el-button
+            type="primary"
+            size="mini"
+            @click="onDistributePermission(row)"
+            v-permission="['distributePermission']"
+          >
             {{ $t('msg.role.assignPermissions') }}
           </el-button>
         </el-table-column>
       </el-table>
     </el-card>
-    <DistributePermission v-model="visible" :roleId="selectUserId"/>
+    <DistributePermission v-model="visible" :roleId="selectUserId" />
   </div>
 </template>
 
