@@ -42,7 +42,7 @@ const initEditor = () => {
   editor.config.showMenuTooltips = true
   editor.config.menuTooltipPosition = 'down'
   // 国际化
-  editor.config.lang = store.getters.lang === 'zh' ? 'zh-CN' : 'en'
+  editor.config.lang = store.getters.language === 'zh' ? 'zh-CN' : 'en'
   editor.i18next = i18next
   editor.create()
 }
