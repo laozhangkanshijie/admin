@@ -14,7 +14,7 @@
       </div>
     </el-card>
     <el-card>
-      <el-table ref="tobleRef" :data="tableData" border style="width: 100%">
+      <el-table ref="tableRef" :data="tableData" border style="width: 100%">
         <el-table-column
           v-for="(item, index) in tableColumns"
           :key="index"
@@ -33,33 +33,6 @@
             >
           </template>
         </el-table-column>
-        <!-- <el-table-column
-          :label="$t('msg.article.title')"
-          prop="title"
-        ></el-table-column>
-        <el-table-column
-          :label="$t('msg.article.author')"
-          prop="author"
-        ></el-table-column>
-        <el-table-column :label="$t('msg.article.publicDate')">
-          <template #default="{ row }">
-            {{ $filters.relativeTime(row.publicDate) }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          :label="$t('msg.article.desc')"
-          prop="desc"
-        ></el-table-column>
-        <el-table-column :label="$t('msg.article.action')">
-          <template #default="{ row }">
-            <el-button type="primary" size="mini" @click="onShowClick(row)">{{
-              $t('msg.article.show')
-            }}</el-button>
-            <el-button type="danger" size="mini" @click="onRemoveClick(row)">
-              {{ $t('msg.article.remove') }}</el-button
-            >
-          </template>
-        </el-table-column> -->
       </el-table>
       <el-pagination
         class="pagination"
@@ -76,10 +49,14 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue'
-import { getArticleList } from '@/api/article'
+import { ref, onActivated, onMounted } from 'vue'
+import { getArticleList, deleteArticle } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLable, tableColumns } from './dynamic/index'
+import { tableRef, initSortable } from './sortable'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 // 数据相关
 const tableData = ref([])
@@ -99,6 +76,11 @@ getListData()
 watchSwitchLang(getListData)
 onActivated(getListData)
 
+// 初始化 sortable
+onMounted(() => {
+  initSortable(tableData, getListData)
+})
+
 const handleSizeChange = (currentSize) => {
   size.value = currentSize
   getListData()
@@ -108,11 +90,26 @@ const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getListData()
 }
+const router = useRouter()
 
-// // 点击查看
-// const onShowClick = () => {}
-// // 点击删除
-// const onRemoveClick = () => {}
+// 点击查看
+const onShowClick = (row) => {
+  router.push(`/article/${row._id}`)
+}
+// 点击删除
+const i18n = useI18n()
+const onRemoveClick = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.article.dialogTitle1') +
+      row.title +
+      i18n.t('msg.article.dialogTitle2'),
+    { type: 'warning' }
+  ).then(async () => {
+    await deleteArticle(row._id)
+    ElMessage.success(i18n.t('msg.article.removeSuccess'))
+    getListData()
+  })
+}
 </script>
 
 <style lang="scss" scoped>
